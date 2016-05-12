@@ -1,14 +1,24 @@
 #!/usr/bin/env python
 # EARTHQUAKE 
 
-# Install Adafruit LCD lib & dependencies from
-#    https://github.com/adafruit/Adafruit_Python_CharLCD
+# Uses LCD 20x4 I2C code from 
+# https://gist.github.com/DenisFromHR/cc863375a6e19dce359d
+# 
+# Expects LCD I2C on 0x27 address
 #
-# Also install:
-# $ sudo apt-get install python-pip python-dev
+# Install:
+# $ sudo apt-get update
+# $ sudo apt-get install build-essential git
+# $ sudo apt-get install python-dev python-smbus python-pip 
+# $ sudo pip install RPi.GPIO
+# $ sudo python setup.py install
+# $ sudo apt-get install aplay 
+# $ sudo apt-get install i2c-tools
 #
-# Usage:
-# $ sudo nohup python -u ./earthquakepi.py &
+# Usage via cron: 
+# $ crontab -e
+# 0,15,30,45 08-23 * * * sudo python -u ./earthquakepi.py >/home/pi/earth.log 2>&1
+#
 #
 # Version 1.0 2016.05.01 - Initial release
 #
@@ -29,13 +39,13 @@ import re
 import traceback
 import RPi.GPIO as GPIO
 
-from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate
+import RPi_I2C_driver
+
 
 ############ USER VARIABLES
 DEBUG = 1        # Debug 0 off 1 on
 MINMAG = 1.0	 # Minimum magnitude to alert on
 AUDIO  = 1       # Sound 0 off 1 on
-QUIET  = [ 00, 07 ] # Don't play audio between midnight & 7:59AM
 WAV = "/home/pi/earthquake.wav"  # Path to Sound file
 PIN = 12	 # GPIO Pin for PWM motor control
 TIMEOUT = 60	 # Timeout waiting for response from URL
@@ -45,7 +55,7 @@ TIMEOUT = 60	 # Timeout waiting for response from URL
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(PIN, GPIO.OUT)
 
-## METHODS
+## METHODS BELOW
 
 def volume(val): # Set Volume based on Magnitude
     vol = str((int(val) * 5) + 50)
@@ -64,24 +74,12 @@ def sound(val): # Play a sound
     #proc = subprocess.call(['/usr/bin/aplay', WAV], stderr=subprocess.PIPE)
     return
 
-def isQuiet():  # Quiet time no sound
-        if AUDIO:
-            hour = time.strftime('%H')
-            if int(hour) >= QUIET[0] and int(hour) < QUIET[1]:
-                return(1)
-            else:
-                return(0)
-        return(1)
-
 def exit():
     """
     Exit handler, which clears all custom chars and shuts down the display.
     """
     try:
-        lcd = Adafruit_CharLCDPlate()
-        #lcd.backlight(lcd.OFF)
-        #clearChars(lcd)
-        #lcd.stop()
+        lcd = RPi_I2C_driver.lcd()
     except:
         # avoids ugly KeyboardInterrupt trace on console...
         pass
@@ -98,12 +96,12 @@ if __name__ == '__main__':
     # timeout in seconds
     socket.setdefaulttimeout(TIMEOUT)
 
-    lcd = Adafruit_CharLCDPlate()
-    lcd.backlight(lcd.ON)
+    lcd = RPi_I2C_driver.lcd()
+    lcd.backlight(1)
     if DEBUG:
-        lcd.clear()
-        lcd.message('EarthquakePi\n')
-        lcd.message('DEBUG ON')
+        lcd.lcd_clear()
+        lcd.lcd_display_string('EarthquakePi',1)
+        lcd.lcd_display_string('DEBUG ON',2)
 	print "DEBUG MODE"
         print "STARTUP"
 	volume(6)
@@ -146,18 +144,19 @@ if __name__ == '__main__':
 	    lines = re.findall(r'.{1,19}(?:\s+|$)', title)
     
 	    # LCD
+	    pos = 1
 	    for line in lines:
-	        lcd.message(line)
-	    lcd.message(utime)
+	        lcd.lcd_display_string(line,pos)
+	        pos = pos + 1 
+	    lcd.lcd_display_string(utime,pos)
     	
 	    for line in lines:
 	        print("> "+ str(line))
 	    print("> "+ str(utime))
     	
 	    # Sound
-            if (not isQuiet()):
-		volume(mag)
-                sound(WAV)
+	    volume(mag)
+            sound(WAV)
     
 	    # Rumble Motor
 	    pulse = 1
