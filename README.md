@@ -1,7 +1,7 @@
 # earthquakepi
 Shake &amp; Rattle Raspberry Pi when an earthquake occurs
 
-Version 0.1 - Under Construction
+Version 1.1 - New Features
 
 There are a number of earthquake detector projects for the raspberry pi. These are good for anyone living in an area prone to earthquakes or for those that want to try to detect distant quakes themselves. 
 
@@ -17,5 +17,5 @@ What does it do?
 You set the minimum magnitude level you wish it to alarm on. But note, if you set to below 2.0, it will probably go off almost constantly!
 
 
-See EarthquakePi.pdf for details
+See EarthquakePi.pdf for details (Coming Soon!)
 
