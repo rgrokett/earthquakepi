@@ -11,8 +11,6 @@
 # $ sudo apt-get install build-essential git
 # $ sudo apt-get install python-dev python-smbus python-pip 
 # $ sudo pip install RPi.GPIO
-# $ sudo python setup.py install
-# $ sudo apt-get install aplay 
 # $ sudo apt-get install i2c-tools
 #
 # Usage via cron: 
@@ -20,7 +18,7 @@
 # 0,15,30,45 08-23 * * * sudo python -u ./earthquakepi.py >/home/pi/earth.log 2>&1
 #
 #
-# Version 1.0 2016.05.01 - Initial release
+# Version 1.1 2016.06.06 - LCD updates
 #
 # License: GPLv3, see: www.gnu.org/licenses/gpl-3.0.html
 #
@@ -43,43 +41,83 @@ import RPi_I2C_driver
 
 
 ############ USER VARIABLES
-DEBUG = 1        # Debug 0 off 1 on
-MINMAG = 1.0	 # Minimum magnitude to alert on
-AUDIO  = 1       # Sound 0 off 1 on
-WAV = "/home/pi/earthquake.wav"  # Path to Sound file
-PIN = 12	 # GPIO Pin for PWM motor control
-TIMEOUT = 60	 # Timeout waiting for response from URL
+DEBUG = 1        # Debug 0 off, 1 on
+MINMAG = 1.0     # Minimum magnitude to alert on
+AUDIO  = 1       # Sound 0 off, 1 on
+PIN = 12         # GPIO Pin for PWM motor control
+TIMEOUT = 60     # Timeout waiting for response from URL
+DISPLAY = 1      # 0 Turn off LCD at exit, 1 Leave LCD on after exit
+WAV = "/home/pi/earthquakepi/earthquake.wav"  # Path to Sound file
 ########### END OF USER VARIABLES
 
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)  # Using BCM Pin layout
 GPIO.setup(PIN, GPIO.OUT)
+GPIO.output(PIN, False)
 
 ## METHODS BELOW
 
+def blink(lcd): # Blink the LCD
+    for i in range(0,3,1):
+        lcd.backlight(1)
+        time.sleep(0.3)
+        lcd.backlight(0)
+        time.sleep(0.3)
+    lcd.backlight(1)
+
 def volume(val): # Set Volume based on Magnitude
     vol = str((int(val) * 5) + 50)
-    cmd = "sudo amixer sset PCM,0 "+str(vol)+"%"
+    cmd = "sudo amixer -q sset PCM,0 "+str(vol)+"%"
     if DEBUG:
+        cmd = "sudo amixer sset PCM,0 "+str(vol)+"%"
 	print(cmd)
     os.system(cmd)
     return
 
 def sound(val): # Play a sound
     time.sleep(1)
-    cmd = "/usr/bin/aplay "+ str(val)
+    cmd = "/usr/bin/aplay -q "+ str(val)
     if DEBUG:
 	print(cmd)
     os.system(cmd)
     #proc = subprocess.call(['/usr/bin/aplay', WAV], stderr=subprocess.PIPE)
     return
 
+def motor(mag): # Run Motor
+    pulse = 1
+    speed = int(mag * 3 + 20)  # Min 20 max 50
+    duration = int(10 - mag)    # 2 sec to 20 sec
+    sec = 0.1
+    
+    p = GPIO.PWM(PIN, 50)  # channel=PIN frequency=50Hz
+    p.start(0)
+    p.ChangeDutyCycle(speed)
+    time.sleep(0.1)
+    for dc in range(speed, 10, -(duration)):
+         p.ChangeDutyCycle(dc)
+         time.sleep(pulse)
+         pulse = pulse + sec
+    p.stop()
+    return
+
+def motor2(mag):	# If needed, use on/off motor instead of PWM
+    GPIO.output(PIN, True)
+    time.sleep(int(mag))
+    GPIO.output(PIN, False)
+    return 
+    
+
 def exit():
     """
     Exit handler, which clears all custom chars and shuts down the display.
     """
     try:
-        lcd = RPi_I2C_driver.lcd()
+	if not DISPLAY:
+            lcd = RPi_I2C_driver.lcd()
+            lcd.backlight(0)
+        if DEBUG:
+            print "exit()"
+        GPIO.cleanup()
     except:
         # avoids ugly KeyboardInterrupt trace on console...
         pass
@@ -97,13 +135,15 @@ if __name__ == '__main__':
     socket.setdefaulttimeout(TIMEOUT)
 
     lcd = RPi_I2C_driver.lcd()
-    lcd.backlight(1)
     if DEBUG:
+        lcd.backlight(1)
         lcd.lcd_clear()
         lcd.lcd_display_string('EarthquakePi',1)
         lcd.lcd_display_string('DEBUG ON',2)
+        lcd.lcd_display_string('All Times are UTC',3)
 	print "DEBUG MODE"
         print "STARTUP"
+	motor(MINMAG)
 	volume(6)
 	sound(WAV)
     
@@ -116,6 +156,7 @@ if __name__ == '__main__':
 
     if DEBUG:
 	print URL
+        print "--------------"
 
     response = urllib2.urlopen(URL)
     data = json.load(response)   
@@ -123,7 +164,7 @@ if __name__ == '__main__':
         print data
         print "--------------"
 
-
+    cnt = 0
     for feature in data['features']:
         if DEBUG:
             print feature['properties']['mag']
@@ -145,6 +186,7 @@ if __name__ == '__main__':
     
 	    # LCD
 	    pos = 1
+	    blink(lcd)
 	    for line in lines:
 	        lcd.lcd_display_string(line,pos)
 	        pos = pos + 1 
@@ -154,26 +196,16 @@ if __name__ == '__main__':
 	        print("> "+ str(line))
 	    print("> "+ str(utime))
     	
-	    # Sound
-	    volume(mag)
-            sound(WAV)
-    
 	    # Rumble Motor
-	    pulse = 1
-            speed = int(mag * 5 + 50)  # Min 50 max 100
-            duration = int(10 - mag)    # 2 sec to 20 sec
-            sec = 0.1
+	    motor(mag)
+
+	    # Sound
+	    if AUDIO:
+	        volume(mag)
+                sound(WAV)
+	    cnt = cnt + 1
+	    time.sleep(15)
     
-            p = GPIO.PWM(PIN, 50)  # channel=PIN frequency=50Hz
-            p.start(0)
-            p.ChangeDutyCycle(speed)
-            time.sleep(0.1)
-            for dc in range(speed, -1, -(duration)):
-                  p.ChangeDutyCycle(dc)
-                  time.sleep(pulse)
-                  pulse = pulse + sec
-            p.stop()
-            GPIO.cleanup()
         except NameError:
             print "No "+str(MINMAG)+" magnitude earthquakes in past 15 minutes"
             if DEBUG:
@@ -182,6 +214,16 @@ if __name__ == '__main__':
             print "Unexpected error:", sys.exc_info()[0]
             if DEBUG:
                 print(traceback.format_exc())
-	if DEBUG:
-	    print "END OF RUN"
+
+    # END FOR LOOP
+    if (cnt == 0):
+        lcd.backlight(DISPLAY)
+        lcd.lcd_clear()
+        lcd.lcd_display_string('EarthquakePi',1)
+        lcd.lcd_display_string('No quakes in 15 min',2)
+        lcd.lcd_display_string(utcnow.strftime('%Y-%m-%dT%H:%M:%S'),3)
+	time.sleep(15)
+	
+    if DEBUG:
+        print "END OF RUN"
 
