@@ -13,12 +13,16 @@
 # $ sudo pip install RPi.GPIO
 # $ sudo apt-get install i2c-tools
 #
+# Optional NeoPixel 8 LED strip
+# Optional Audio
+# Optional Motor
+#
 # Usage via cron: 
 # $ crontab -e
-# 0,15,30,45 08-23 * * * sudo python -u ./earthquakepi.py >/home/pi/earth.log 2>&1
+# 0,15,30,45 08-22 * * * sudo python /home/pi/earthquakepi/earthquakepi.py >/home/pi/earthquakepi/earth.log 2>&1
 #
 #
-# Version 1.1 2016.06.06 - LCD updates
+# Version 1.2 2016.06.07 - LCD updates
 #
 # License: GPLv3, see: www.gnu.org/licenses/gpl-3.0.html
 #
@@ -41,15 +45,18 @@ import RPi_I2C_driver
 
 
 ############ USER VARIABLES
-DEBUG = 1        # Debug 0 off, 1 on
-MINMAG = 1.0     # Minimum magnitude to alert on
-AUDIO  = 1       # Sound 0 off, 1 on
-PIN = 12         # GPIO Pin for PWM motor control
-TIMEOUT = 60     # Timeout waiting for response from URL
-DISPLAY = 1      # 0 Turn off LCD at exit, 1 Leave LCD on after exit
+DEBUG    = 1       # Debug 0 off, 1 on
+MINMAG   = 1.0     # Minimum magnitude to alert on
+AUDIO    = 1       # Sound 0 off, 1 on
+PIN      = 12      # GPIO Pin for PWM motor control
+PAUSE    = 60      # Display each Earthquake for X seconds
+DISPLAY  = 0       # 0 Turn off LCD at exit, 1 Leave LCD on after exit
+NEOPIXEL = 0       # 1 use Neopixel, 0 don't use Neopixel
 WAV = "/home/pi/earthquakepi/earthquake.wav"  # Path to Sound file
 ########### END OF USER VARIABLES
 
+if NEOPIXEL:
+   import ledbar
 
 GPIO.setmode(GPIO.BCM)  # Using BCM Pin layout
 GPIO.setup(PIN, GPIO.OUT)
@@ -132,7 +139,10 @@ if __name__ == '__main__':
     atexit.register(exit)
 
     # timeout in seconds
-    socket.setdefaulttimeout(TIMEOUT)
+    socket.setdefaulttimeout(90)
+
+    if NEOPIXEL:
+        strip = ledbar.init()
 
     lcd = RPi_I2C_driver.lcd()
     if DEBUG:
@@ -143,9 +153,12 @@ if __name__ == '__main__':
         lcd.lcd_display_string('All Times are UTC',3)
 	print "DEBUG MODE"
         print "STARTUP"
+        if NEOPIXEL:
+            ledbar.bargraph(strip,9)
 	motor(MINMAG)
 	volume(6)
 	sound(WAV)
+	PAUSE = 10
     
     utcnow = datetime.datetime.utcnow()
     utcnow_15 = utcnow - datetime.timedelta(minutes = 15)
@@ -154,13 +167,12 @@ if __name__ == '__main__':
 
     URL = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime="+starttime+"&endtime="+endtime+"&minmagnitude="+str(MINMAG)
 
-    if DEBUG:
-	print URL
-        print "--------------"
+    print URL
 
     response = urllib2.urlopen(URL)
     data = json.load(response)   
     if DEBUG:
+        print "--------------"
         print data
         print "--------------"
 
@@ -184,6 +196,18 @@ if __name__ == '__main__':
             utime = datetime.datetime.utcfromtimestamp(int(tm)).strftime('%Y-%m-%d %H:%M:%S')
 	    lines = re.findall(r'.{1,19}(?:\s+|$)', title)
     
+	    # LED BAR
+	    if NEOPIXEL:
+                # Color wipe animations.
+                if (int(mag) < 4):
+                    ledbar.leds(strip, LED_BRIGHTNESS,0,0)     # Green
+                elif (int(mag) > 6):
+                    ledbar.leds(strip, 0,LED_BRIGHTNESS,0)     # Red
+                else:
+                    ledbar.leds(strip, LED_BRIGHTNESS,LED_BRIGHTNESS,0) # Yellow
+    
+                ledbar.bargraph(strip,mag)
+	    
 	    # LCD
 	    pos = 1
 	    blink(lcd)
@@ -204,7 +228,9 @@ if __name__ == '__main__':
 	        volume(mag)
                 sound(WAV)
 	    cnt = cnt + 1
-	    time.sleep(15)
+	    time.sleep(PAUSE)
+	    if NEOPIXEL:
+	        ledbar.colorWipe(strip, ledbar.Color(0, 0, 0))  # Black wipe
     
         except NameError:
             print "No "+str(MINMAG)+" magnitude earthquakes in past 15 minutes"
@@ -216,13 +242,16 @@ if __name__ == '__main__':
                 print(traceback.format_exc())
 
     # END FOR LOOP
+    if NEOPIXEL:
+        ledbar.colorWipe(strip, ledbar.Color(0, 0, 0))  # Black wipe
+
     if (cnt == 0):
         lcd.backlight(DISPLAY)
         lcd.lcd_clear()
         lcd.lcd_display_string('EarthquakePi',1)
         lcd.lcd_display_string('No quakes in 15 min',2)
         lcd.lcd_display_string(utcnow.strftime('%Y-%m-%dT%H:%M:%S'),3)
-	time.sleep(15)
+	time.sleep(PAUSE)
 	
     if DEBUG:
         print "END OF RUN"
