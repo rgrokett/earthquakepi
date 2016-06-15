@@ -1,0 +1,453 @@
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T18:00:02&endtime=2016-06-12T18:15:02&minmagnitude=1.0
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T18:15:02&endtime=2016-06-12T18:30:02&minmagnitude=3.0
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T18:30:02&endtime=2016-06-12T18:45:02&minmagnitude=3.0
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T18:45:02&endtime=2016-06-12T19:00:02&minmagnitude=3.0
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T19:00:02&endtime=2016-06-12T19:15:02&minmagnitude=3.0
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T19:15:02&endtime=2016-06-12T19:30:02&minmagnitude=1.0
+1.22
+1465758973120
+11km NNE of Borrego Springs, CA
+[-116.3448333, 33.3525, 10.87]
+M 1.2 - 11km NNE of Borrego Springs, CA
+--------------
+No 1.0 magnitude earthquakes in past 15 minutes
+2.41
+1465758905050
+23km SSW of La Quinta, CA
+[-116.4141667, 33.4786667, 8.71]
+M 2.4 - 23km SSW of La Quinta, CA
+--------------
+No 1.0 magnitude earthquakes in past 15 minutes
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T19:30:03&endtime=2016-06-12T19:45:03&minmagnitude=1.0
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T19:45:02&endtime=2016-06-12T20:00:02&minmagnitude=1.0
+/home/pi/earthquakepi/earthquakepi.py:63: RuntimeWarning: This channel is already in use, continuing anyway.  Use GPIO.setwarnings(False) to disable warnings.
+  GPIO.setup(PIN, GPIO.OUT)
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T20:00:03&endtime=2016-06-12T20:15:03&minmagnitude=1.0
+None
+exit()
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T20:15:02&endtime=2016-06-12T20:30:02&minmagnitude=1.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T20:30:03&endtime=2016-06-12T20:45:03&minmagnitude=1.0
+2.73
+1465763866160
+7km WSW of Saint Helena, California
+[-122.5595016, 38.4906654, 8.78]
+M 2.7 - 7km WSW of Saint Helena, California
+--------------
+No 1.0 magnitude earthquakes in past 15 minutes
+Traceback (most recent call last):
+  File "/home/pi/earthquakepi/earthquakepi.py", line 208, in <module>
+    ledbar.leds(strip, LED_BRIGHTNESS,0,0)     # Green
+NameError: name 'LED_BRIGHTNESS' is not defined
+
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T20:45:02&endtime=2016-06-12T21:00:02&minmagnitude=1.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T21:00:03&endtime=2016-06-12T21:15:03&minmagnitude=1.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T21:15:03&endtime=2016-06-12T21:30:03&minmagnitude=1.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T21:30:03&endtime=2016-06-12T21:45:03&minmagnitude=1.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T21:45:03&endtime=2016-06-12T22:00:03&minmagnitude=1.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T22:00:03&endtime=2016-06-12T22:15:03&minmagnitude=1.0
+1.6
+1465769281750
+9km NE of Borrego Springs, CA
+[-116.2981667, 33.307, 10.4]
+M 1.6 - 9km NE of Borrego Springs, CA
+--------------
+> M 1.6 - 9km NE of 
+> Borrego Springs, CA
+> 2016-06-12 22:08:01
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T22:15:02&endtime=2016-06-12T22:30:02&minmagnitude=1.0
+1.19
+1465770458950
+12km SSW of Ocotillo Wells, California
+[-116.1613312, 33.0393333, 8.22]
+M 1.2 - 12km SSW of Ocotillo Wells, California
+--------------
+> M 1.2 - 12km SSW of 
+> Ocotillo Wells, 
+> California
+> 2016-06-12 22:27:38
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T22:30:02&endtime=2016-06-12T22:45:02&minmagnitude=1.0
+1.1
+1465771115296
+9km S of Beatty, Nevada
+[-116.7755, 36.8265, 0]
+M 1.1 - 9km S of Beatty, Nevada
+--------------
+> M 1.1 - 9km S of 
+> Beatty, Nevada
+> 2016-06-12 22:38:35
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T22:45:03&endtime=2016-06-12T23:00:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T23:00:02&endtime=2016-06-12T23:15:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T23:15:03&endtime=2016-06-12T23:30:03&minmagnitude=3.0
+3.13
+1465773567560
+24km ESE of Anza, California
+[-116.4358368, 33.4674988, 10.69]
+M 3.1 - 24km ESE of Anza, California
+--------------
+> M 3.1 - 24km ESE of 
+> Anza, California
+> 2016-06-12 23:19:27
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T23:30:02&endtime=2016-06-12T23:45:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-12T23:45:02&endtime=2016-06-13T00:00:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T00:00:02&endtime=2016-06-13T00:15:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T00:15:02&endtime=2016-06-13T00:30:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T00:30:02&endtime=2016-06-13T00:45:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T00:45:02&endtime=2016-06-13T01:00:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T01:00:02&endtime=2016-06-13T01:15:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T01:15:02&endtime=2016-06-13T01:30:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T01:30:03&endtime=2016-06-13T01:45:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T01:45:03&endtime=2016-06-13T02:00:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T02:00:02&endtime=2016-06-13T02:15:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T02:15:03&endtime=2016-06-13T02:30:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T02:30:02&endtime=2016-06-13T02:45:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T11:45:03&endtime=2016-06-13T12:00:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T12:00:03&endtime=2016-06-13T12:15:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T12:15:03&endtime=2016-06-13T12:30:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T12:30:03&endtime=2016-06-13T12:45:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T12:45:03&endtime=2016-06-13T13:00:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T13:00:03&endtime=2016-06-13T13:15:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T13:15:03&endtime=2016-06-13T13:30:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T13:30:02&endtime=2016-06-13T13:45:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T13:45:03&endtime=2016-06-13T14:00:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T14:00:03&endtime=2016-06-13T14:15:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T14:15:03&endtime=2016-06-13T14:30:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T14:30:02&endtime=2016-06-13T14:45:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T14:45:03&endtime=2016-06-13T15:00:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T15:00:02&endtime=2016-06-13T15:15:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T15:15:02&endtime=2016-06-13T15:30:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T15:30:02&endtime=2016-06-13T15:45:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T15:45:02&endtime=2016-06-13T16:00:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T16:00:02&endtime=2016-06-13T16:15:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T16:15:02&endtime=2016-06-13T16:30:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T16:45:03&endtime=2016-06-13T17:00:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T17:00:02&endtime=2016-06-13T17:15:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T17:15:02&endtime=2016-06-13T17:30:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T17:30:03&endtime=2016-06-13T17:45:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T17:45:03&endtime=2016-06-13T18:00:03&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T18:00:02&endtime=2016-06-13T18:15:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T18:15:02&endtime=2016-06-13T18:30:02&minmagnitude=3.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T18:30:03&endtime=2016-06-13T18:45:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T18:45:03&endtime=2016-06-13T19:00:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T19:00:02&endtime=2016-06-13T19:15:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T19:15:02&endtime=2016-06-13T19:30:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T19:30:03&endtime=2016-06-13T19:45:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T19:45:03&endtime=2016-06-13T20:00:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T19:45:02&endtime=2016-06-13T20:00:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T20:00:03&endtime=2016-06-13T20:15:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T20:15:03&endtime=2016-06-13T20:30:03&minmagnitude=2.0
+2.19
+1465849324380
+8km SW of Volcano, Hawaii
+[-155.2839966, 19.3688335, 2.79]
+M 2.2 - 8km SW of Volcano, Hawaii
+--------------
+> M 2.2 - 8km SW of 
+> Volcano, Hawaii
+> 2016-06-13 20:22:04
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T20:30:03&endtime=2016-06-13T20:45:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T20:45:02&endtime=2016-06-13T21:00:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T21:00:02&endtime=2016-06-13T21:15:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T21:15:03&endtime=2016-06-13T21:30:03&minmagnitude=2.0
+2.4
+1465853256000
+64km W of Anchor Point, Alaska
+[-152.9712, 59.7389, 93.6]
+M 2.4 - 64km W of Anchor Point, Alaska
+--------------
+> M 2.4 - 64km W of 
+> Anchor Point, 
+> Alaska
+> 2016-06-13 21:27:36
+2.38
+1465852527670
+1km WNW of Princeton, Canada
+[-120.5256667, 49.4635, -0.53]
+M 2.4 Explosion - 1km WNW of Princeton, Canada
+--------------
+> M 2.4 Explosion - 
+> 1km WNW of 
+> Princeton, Canada
+> 2016-06-13 21:15:27
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T21:30:02&endtime=2016-06-13T21:45:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T21:45:02&endtime=2016-06-13T22:00:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T22:00:03&endtime=2016-06-13T22:15:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T22:15:03&endtime=2016-06-13T22:30:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T22:30:03&endtime=2016-06-13T22:45:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T22:45:02&endtime=2016-06-13T23:00:02&minmagnitude=2.0
+2.2
+1465858271000
+29km N of Sutton-Alpine, Alaska
+[-148.9132, 62.0618, 20.8]
+M 2.2 - 29km N of Sutton-Alpine, Alaska
+--------------
+> M 2.2 - 29km N of 
+> Sutton-Alpine, 
+> Alaska
+> 2016-06-13 22:51:11
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T23:00:02&endtime=2016-06-13T23:15:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T23:15:03&endtime=2016-06-13T23:30:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T23:30:03&endtime=2016-06-13T23:45:03&minmagnitude=2.0
+2.1
+1465861017690
+20km NW of Hawthorne, Nevada
+[-118.7931, 38.654, 6.6]
+M 2.1 - 20km NW of Hawthorne, Nevada
+--------------
+> M 2.1 - 20km NW of 
+> Hawthorne, Nevada
+> 2016-06-13 23:36:57
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-13T23:45:02&endtime=2016-06-14T00:00:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T00:00:02&endtime=2016-06-14T00:15:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T00:15:03&endtime=2016-06-14T00:30:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T00:30:03&endtime=2016-06-14T00:45:03&minmagnitude=2.0
+4.9
+1465864235190
+6km N of Taron, Papua New Guinea
+[153.0216, -4.4064, 46.15]
+M 4.9 - 6km N of Taron, Papua New Guinea
+--------------
+> M 4.9 - 6km N of 
+> Taron, Papua New 
+> Guinea
+> 2016-06-14 00:30:35
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T00:45:03&endtime=2016-06-14T01:00:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T01:00:03&endtime=2016-06-14T01:15:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T01:15:02&endtime=2016-06-14T01:30:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T01:30:02&endtime=2016-06-14T01:45:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T01:45:02&endtime=2016-06-14T02:00:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T02:00:02&endtime=2016-06-14T02:15:02&minmagnitude=2.0
+2.6
+1465870343000
+35km NNE of Anchor Point, Alaska
+[-151.6389, 60.0779, 70.6]
+M 2.6 - 35km NNE of Anchor Point, Alaska
+--------------
+> M 2.6 - 35km NNE of 
+> Anchor Point, 
+> Alaska
+> 2016-06-14 02:12:23
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T02:15:03&endtime=2016-06-14T02:30:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T11:30:02&endtime=2016-06-14T11:45:02&minmagnitude=2.0
+2.7
+1465904530000
+31km NNE of Sterling, Alaska
+[-150.5187, 60.7908, 43.9]
+M 2.7 - 31km NNE of Sterling, Alaska
+--------------
+> M 2.7 - 31km NNE of 
+> Sterling, Alaska
+> 2016-06-14 11:42:10
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T11:45:02&endtime=2016-06-14T12:00:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T12:00:02&endtime=2016-06-14T12:15:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T12:15:03&endtime=2016-06-14T12:30:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T12:30:03&endtime=2016-06-14T12:45:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T12:45:02&endtime=2016-06-14T13:00:02&minmagnitude=2.0
+4.2
+1465908697000
+98km NNE of Chignik Lake, Alaska
+[-158.084, 57.0555, 4.7]
+M 4.2 - 98km NNE of Chignik Lake, Alaska
+--------------
+> M 4.2 - 98km NNE of 
+> Chignik Lake, 
+> Alaska
+> 2016-06-14 12:51:37
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T13:00:03&endtime=2016-06-14T13:15:03&minmagnitude=2.0
+2.08
+1465909304490
+4km N of Gardena, CA
+[-118.3028333, 33.9235, 6.9]
+M 2.1 - 4km N of Gardena, CA
+--------------
+> M 2.1 - 4km N of 
+> Gardena, CA
+> 2016-06-14 13:01:44
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T13:15:02&endtime=2016-06-14T13:30:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T13:30:02&endtime=2016-06-14T13:45:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T13:45:03&endtime=2016-06-14T14:00:03&minmagnitude=2.0
+6.2
+1465912164920
+92km NNW of Isangel, Vanuatu
+[168.8407, -18.8141, 131.65]
+M 6.2 - 92km NNW of Isangel, Vanuatu
+--------------
+> M 6.2 - 92km NNW of 
+> Isangel, Vanuatu
+> 2016-06-14 13:49:24
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T14:00:03&endtime=2016-06-14T14:15:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T14:15:02&endtime=2016-06-14T14:30:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T14:30:03&endtime=2016-06-14T14:45:03&minmagnitude=2.0
+2
+1465915057000
+8km E of Big Lake, Alaska
+[-149.8037, 61.5198, 28.1]
+M 2.0 - 8km E of Big Lake, Alaska
+--------------
+> M 2.0 - 8km E of 
+> Big Lake, Alaska
+> 2016-06-14 14:37:37
+3.94
+1465914928700
+52km W of West Yellowstone, Montana
+[-111.7651672, 44.7330017, 10.29]
+M 3.9 - 52km W of West Yellowstone, Montana
+--------------
+> M 3.9 - 52km W of 
+> West Yellowstone, 
+> Montana
+> 2016-06-14 14:35:28
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T14:45:02&endtime=2016-06-14T15:00:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T15:00:03&endtime=2016-06-14T15:15:03&minmagnitude=2.0
+5.4
+1465916517510
+172km SSE of Naze, Japan
+[130.1853, 26.9421, 10]
+M 5.4 - 172km SSE of Naze, Japan
+--------------
+> M 5.4 - 172km SSE 
+> of Naze, Japan
+> 2016-06-14 15:01:57
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T15:15:03&endtime=2016-06-14T15:30:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T15:30:03&endtime=2016-06-14T15:45:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T15:45:03&endtime=2016-06-14T16:00:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T16:00:02&endtime=2016-06-14T16:15:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T16:15:02&endtime=2016-06-14T16:30:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T16:30:02&endtime=2016-06-14T16:45:02&minmagnitude=2.0
+2.2
+1465921993800
+6km WSW of Fuig, Puerto Rico
+[-66.9783, 17.9685, 44]
+M 2.2 - 6km WSW of Fuig, Puerto Rico
+--------------
+> M 2.2 - 6km WSW of 
+> Fuig, Puerto Rico
+> 2016-06-14 16:33:13
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T16:45:03&endtime=2016-06-14T17:00:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T17:00:03&endtime=2016-06-14T17:15:03&minmagnitude=2.0
+5.2
+1465924404000
+72km SSW of Adak, Alaska
+[-176.979, 51.263, 12]
+M 5.2 - 72km SSW of Adak, Alaska
+--------------
+> M 5.2 - 72km SSW of 
+> Adak, Alaska
+> 2016-06-14 17:13:24
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T17:15:03&endtime=2016-06-14T17:30:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T17:30:03&endtime=2016-06-14T17:45:03&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T17:45:02&endtime=2016-06-14T18:00:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T18:00:02&endtime=2016-06-14T18:15:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T18:15:02&endtime=2016-06-14T18:30:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T18:30:02&endtime=2016-06-14T18:45:02&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T18:45:02&endtime=2016-06-14T19:00:02&minmagnitude=2.0
+No quakes in past 15 min
+/home/pi/earthquakepi/earthquakepi.py:65: RuntimeWarning: This channel is already in use, continuing anyway.  Use GPIO.setwarnings(False) to disable warnings.
+  GPIO.setup(PIN, GPIO.OUT)
+/home/pi/earthquakepi/earthquakepi.py:65: RuntimeWarning: This channel is already in use, continuing anyway.  Use GPIO.setwarnings(False) to disable warnings.
+  GPIO.setup(PIN, GPIO.OUT)
+/home/pi/earthquakepi/earthquakepi.py:65: RuntimeWarning: This channel is already in use, continuing anyway.  Use GPIO.setwarnings(False) to disable warnings.
+  GPIO.setup(PIN, GPIO.OUT)
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T19:57:24&endtime=2016-06-14T20:12:24&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T19:57:34&endtime=2016-06-14T20:12:34&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T19:57:44&endtime=2016-06-14T20:12:44&minmagnitude=2.0
+No quakes in past 15 min
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2016-06-14T19:57:54&endtime=2016-06-14T20:12:54&minmagnitude=2.0
+No quakes in past 15 min

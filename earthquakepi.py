@@ -6,12 +6,6 @@
 # 
 # Expects LCD I2C on 0x27 address
 #
-# Install:
-# $ sudo apt-get update
-# $ sudo apt-get install build-essential git
-# $ sudo apt-get install python-dev python-smbus python-pip 
-# $ sudo pip install RPi.GPIO
-# $ sudo apt-get install i2c-tools
 #
 # Optional NeoPixel 8 LED strip
 # Optional Audio
@@ -22,7 +16,7 @@
 # 0,15,30,45 08-22 * * * sudo python /home/pi/earthquakepi/earthquakepi.py >/home/pi/earthquakepi/earth.log 2>&1
 #
 #
-# Version 1.2 2016.06.07 - LCD updates
+# Version 1.3 2016.06.12 - LCD updates
 #
 # License: GPLv3, see: www.gnu.org/licenses/gpl-3.0.html
 #
@@ -43,24 +37,27 @@ import RPi.GPIO as GPIO
 
 import RPi_I2C_driver
 
-
 ############ USER VARIABLES
 DEBUG    = 1       # Debug 0 off, 1 on
+LOG      = 1       # Log Earthquake data for past 15 min
 MINMAG   = 1.0     # Minimum magnitude to alert on
 AUDIO    = 1       # Sound 0 off, 1 on
-PIN      = 12      # GPIO Pin for PWM motor control
+MOTOR    = 1	   # Vibrate Motor 0 off, 1 on
+MOTORPIN = 16      # GPIO Pin for PWM motor control
+NEOPIXEL = 1       # 1 use Neopixel, 0 don't use Neopixel
+NEO_BRIGHTNESS = 64 # Set to 0 for darkest and 255 for brightest
+## OTHER SETTINGS
 PAUSE    = 60      # Display each Earthquake for X seconds
-DISPLAY  = 0       # 0 Turn off LCD at exit, 1 Leave LCD on after exit
-NEOPIXEL = 0       # 1 use Neopixel, 0 don't use Neopixel
 WAV = "/home/pi/earthquakepi/earthquake.wav"  # Path to Sound file
+DISPLAY  = 0       # 0 Turn off LCD at exit, 1 Leave LCD on after exit
 ########### END OF USER VARIABLES
 
 if NEOPIXEL:
    import ledbar
 
 GPIO.setmode(GPIO.BCM)  # Using BCM Pin layout
-GPIO.setup(PIN, GPIO.OUT)
-GPIO.output(PIN, False)
+GPIO.setup(MOTORPIN, GPIO.OUT)
+GPIO.output(MOTORPIN, False)
 
 ## METHODS BELOW
 
@@ -83,7 +80,7 @@ def volume(val): # Set Volume based on Magnitude
 
 def sound(val): # Play a sound
     time.sleep(1)
-    cmd = "/usr/bin/aplay -q "+ str(val)
+    cmd = "/usr/bin/aplay -q "+str(val)
     if DEBUG:
 	print(cmd)
     os.system(cmd)
@@ -96,7 +93,7 @@ def motor(mag): # Run Motor
     duration = int(10 - mag)    # 2 sec to 20 sec
     sec = 0.1
     
-    p = GPIO.PWM(PIN, 50)  # channel=PIN frequency=50Hz
+    p = GPIO.PWM(MOTORPIN, 50)  # channel=MOTORPIN frequency=50Hz
     p.start(0)
     p.ChangeDutyCycle(speed)
     time.sleep(0.1)
@@ -108,9 +105,9 @@ def motor(mag): # Run Motor
     return
 
 def motor2(mag):	# If needed, use on/off motor instead of PWM
-    GPIO.output(PIN, True)
+    GPIO.output(MOTORPIN, True)
     time.sleep(int(mag))
-    GPIO.output(PIN, False)
+    GPIO.output(MOTORPIN, False)
     return 
     
 
@@ -138,9 +135,6 @@ def exit():
 if __name__ == '__main__':
     atexit.register(exit)
 
-    # timeout in seconds
-    socket.setdefaulttimeout(90)
-
     if NEOPIXEL:
         strip = ledbar.init()
 
@@ -155,30 +149,40 @@ if __name__ == '__main__':
         print "STARTUP"
         if NEOPIXEL:
             ledbar.bargraph(strip,9)
-	motor(MINMAG)
-	volume(6)
-	sound(WAV)
+	if MOTOR:
+	    motor(4)
+	if AUDIO:
+	    volume(6)
+	    sound(WAV)
 	PAUSE = 10
     
     utcnow = datetime.datetime.utcnow()
     utcnow_15 = utcnow - datetime.timedelta(minutes = 15)
-    starttime = utcnow_15.strftime('%Y-%m-%dT%H:%M:%S')
-    endtime = utcnow.strftime('%Y-%m-%dT%H:%M:%S')
+    utcnow_30 = utcnow - datetime.timedelta(minutes = 30)
+    starttime = utcnow_30.strftime('%Y-%m-%dT%H:%M:%S')
+    endtime = utcnow_15.strftime('%Y-%m-%dT%H:%M:%S')
 
     URL = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime="+starttime+"&endtime="+endtime+"&minmagnitude="+str(MINMAG)
 
-    print URL
+    if LOG:
+	print URL
 
-    response = urllib2.urlopen(URL)
-    data = json.load(response)   
-    if DEBUG:
-        print "--------------"
-        print data
-        print "--------------"
-
+    # Call USGS API. timeout in seconds (USGS response time can be slow!)
+    try:
+        tmout = 120
+        #socket.setdefaulttimeout(tmout)
+        response = urllib2.urlopen(URL, timeout=tmout)
+        data = json.load(response)   
+        if DEBUG:
+            print "--------------"
+            print data
+            print "--------------"
+    except:
+	print "timeout waiting for USGS"
+    
     cnt = 0
     for feature in data['features']:
-        if DEBUG:
+        if LOG:
             print feature['properties']['mag']
             print feature['properties']['time']
             print feature['properties']['place']
@@ -196,15 +200,19 @@ if __name__ == '__main__':
             utime = datetime.datetime.utcfromtimestamp(int(tm)).strftime('%Y-%m-%d %H:%M:%S')
 	    lines = re.findall(r'.{1,19}(?:\s+|$)', title)
     
+	    # Rumble Motor
+	    if MOTOR:
+	        motor(mag)
+
 	    # LED BAR
 	    if NEOPIXEL:
                 # Color wipe animations.
                 if (int(mag) < 4):
-                    ledbar.leds(strip, LED_BRIGHTNESS,0,0)     # Green
+                    ledbar.leds(strip, NEO_BRIGHTNESS,0,0)     # Green
                 elif (int(mag) > 6):
-                    ledbar.leds(strip, 0,LED_BRIGHTNESS,0)     # Red
+                    ledbar.leds(strip, 0,NEO_BRIGHTNESS,0)     # Red
                 else:
-                    ledbar.leds(strip, LED_BRIGHTNESS,LED_BRIGHTNESS,0) # Yellow
+                    ledbar.leds(strip, NEO_BRIGHTNESS,NEO_BRIGHTNESS,0) # Yellow
     
                 ledbar.bargraph(strip,mag)
 	    
@@ -220,15 +228,13 @@ if __name__ == '__main__':
 	        print("> "+ str(line))
 	    print("> "+ str(utime))
     	
-	    # Rumble Motor
-	    motor(mag)
-
 	    # Sound
 	    if AUDIO:
 	        volume(mag)
                 sound(WAV)
 	    cnt = cnt + 1
 	    time.sleep(PAUSE)
+
 	    if NEOPIXEL:
 	        ledbar.colorWipe(strip, ledbar.Color(0, 0, 0))  # Black wipe
     
@@ -236,6 +242,7 @@ if __name__ == '__main__':
             print "No "+str(MINMAG)+" magnitude earthquakes in past 15 minutes"
             if DEBUG:
                 print(traceback.format_exc())
+            print(traceback.format_exc()) # TEMPY
         except Exception as e:
             print "Unexpected error:", sys.exc_info()[0]
             if DEBUG:
@@ -252,6 +259,8 @@ if __name__ == '__main__':
         lcd.lcd_display_string('No quakes in 15 min',2)
         lcd.lcd_display_string(utcnow.strftime('%Y-%m-%dT%H:%M:%S'),3)
 	time.sleep(PAUSE)
+	if LOG:
+	    print "No quakes in past 15 min"
 	
     if DEBUG:
         print "END OF RUN"
