@@ -216,8 +216,9 @@ if __name__ == '__main__':
     
                 ledbar.bargraph(strip,mag)
 	    
-	    # LCD
+	    # LCD 20 x 4 DISPLAY
 	    pos = 1
+            lcd.lcd_clear()
 	    blink(lcd)
 	    for line in lines:
 	        lcd.lcd_display_string(line,pos)
