@@ -17,5 +17,5 @@ What does it do?
 You set the minimum magnitude level you wish it to alarm on. But note, if you set to below 2.0, it will probably go off almost constantly!
 
 
-See EarthquakePi.pdf for details (Coming Soon!)
+See EarthquakePi.pdf for details
 
