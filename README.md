@@ -17,5 +17,13 @@ What does it do?
 You set the minimum magnitude level you wish it to alarm on. But note, if you set to below 2.0, it will probably go off almost constantly!
 
 
-See EarthquakePi.pdf for details
+## Update
+2018-11: A test program is now included so you can easily test each optional feature of the earthquake box.  
+
+```
+cd /home/pi/earthquakepi
+sudo python test.py
+```
+
+See EarthquakePi.pdf for construction details.
 
