@@ -7,8 +7,8 @@
 # Turn off unused Options, below
 # Expects LCD I2C on 0x27 address
 # Optional NeoPixel 8 LED strip -- NEOPIXEL
-# Optional Audio		-- AUDIO
-# Optional Motor		-- MOTOR
+# Optional Audio    -- AUDIO
+# Optional Motor    -- MOTOR
 #
 # Usage:
 #   sudo python test.py
@@ -23,7 +23,7 @@
 
 import subprocess
 import os
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import json
 import datetime
 import time
@@ -32,6 +32,7 @@ import socket
 import sys
 import re
 import traceback
+import neopixel
 import RPi.GPIO as GPIO
 
 import RPi_I2C_driver
@@ -41,7 +42,7 @@ DEBUG    = 1       # Debug ON for Testing
 LOG      = 1       # Log Earthquake data for past 15 min
 MINMAG   = 3.0     # Minimum magnitude to alert on
 AUDIO    = 1       # Sound 0 off, 1 on
-MOTOR    = 1	   # Vibrate Motor 0 off, 1 on
+MOTOR    = 1     # Vibrate Motor 0 off, 1 on
 MOTORPIN = 16      # GPIO Pin for PWM motor control
 NEOPIXEL = 1       # 1 use Neopixel, 0 don't use Neopixel
 NEO_BRIGHTNESS = 64 # Set to 0 for darkest and 255 for brightest
@@ -73,7 +74,7 @@ def volume(val): # Set Volume based on Magnitude
     cmd = "sudo amixer -q sset PCM,0 "+str(vol)+"%"
     if DEBUG:
         cmd = "sudo amixer sset PCM,0 "+str(vol)+"%"
-	print(cmd)
+    print(cmd)
     os.system(cmd)
     return
 
@@ -81,7 +82,7 @@ def sound(val): # Play a sound
     time.sleep(1)
     cmd = "/usr/bin/aplay -q "+str(val)
     if DEBUG:
-	print(cmd)
+        print(cmd)
     os.system(cmd)
     return
 
@@ -102,7 +103,7 @@ def motor(mag): # Run Motor
     p.stop()
     return
 
-def motor2(mag):	# If needed, use on/off motor instead of PWM
+def motor2(mag):  # If needed, use on/off motor instead of PWM
     GPIO.output(MOTORPIN, True)
     time.sleep(int(mag))
     GPIO.output(MOTORPIN, False)
@@ -114,12 +115,12 @@ def exit():
     Exit handler, which clears all custom chars and shuts down the display.
     """
     try:
-	if not DISPLAY:
+      if not DISPLAY:
             lcd = RPi_I2C_driver.lcd()
             lcd.backlight(0)
-        if DEBUG:
-            print "exit()"
-        GPIO.cleanup()
+      if DEBUG:
+            print("exit()")
+      GPIO.cleanup()
     except:
         # avoids ugly KeyboardInterrupt trace on console...
         pass
@@ -133,13 +134,13 @@ def exit():
 if __name__ == '__main__':
     atexit.register(exit)
 
-    print "Testing each module..."  
-    print "You should see/hear each installed module in turn."
+    print("Testing each module...")  
+    print("You should see/hear each installed module in turn.")
 
     if NEOPIXEL:
         strip = ledbar.init()
 
-    print "TESTING: LCD SCREEN..."
+    print("TESTING: LCD SCREEN...")
     lcd = RPi_I2C_driver.lcd()
     if DEBUG:
         lcd.backlight(1)
@@ -147,52 +148,53 @@ if __name__ == '__main__':
         lcd.lcd_display_string('EarthquakePi',1)
         lcd.lcd_display_string('TESTING ON',2)
         lcd.lcd_display_string('DISPLAY TEST',3)
-        print "LCD DISPLAY SHOULD BE ON"
+        print("LCD DISPLAY SHOULD BE ON")
         time.sleep(PAUSE)
         lcd.lcd_clear()
         lcd.backlight(0)
-        if NEOPIXEL:
-            print "TESTING: BARGRAPH..."
+    if NEOPIXEL:
+            print("TESTING: BARGRAPH...")
             ledbar.bargraph(strip,9)
-            print "BARGRAPH SHOULD BE ON"
+            print("BARGRAPH SHOULD BE ON")
             time.sleep(PAUSE)
-            ledbar.colorWipe(strip, ledbar.Color(0, 0, 0))  # Black wipe
-        else :
-            print "NEOPIXEL is NOT ACTIVATED" 
-	if MOTOR:
-            print "TESTING: MOTOR..."
-            print "MOTOR SHOULD BE ON"
-	    motor(4)
+            ledbar.colorWipe(strip, (0, 0, 0))  # Black wipe
+    else :
+            print("NEOPIXEL is NOT ACTIVATED") 
+    if MOTOR:
+            print("TESTING: MOTOR...")
+            print("MOTOR SHOULD BE ON")
+            motor(4)
             time.sleep(PAUSE)
-        else :
-            print "MOTOR is NOT ACTIVATED" 
-	if AUDIO:
-            print "TESTING: AUDIO..."
-	    volume(6)
-            print "SOUND SHOULD BE ON"
-	    sound(WAV)
+    else :
+            print("MOTOR is NOT ACTIVATED") 
+    if AUDIO:
+            print("TESTING: AUDIO...")
+            volume(6)
+            print("SOUND SHOULD BE ON")
+            sound(WAV)
             time.sleep(PAUSE)
-        else :
-            print "AUDIO is NOT ACTIVATED" 
+    else :
+            print("AUDIO is NOT ACTIVATED") 
     
     URL = "https://earthquake.usgs.gov/fdsnws/event/1/application.json"
 
-    print "TESTING: URL ACCESS..."
-    print URL
+    print("TESTING: URL ACCESS...")
+    print(URL)
 
-    try:
-        tmout = 120
-        response = urllib2.urlopen(URL, timeout=tmout)
-        data = json.load(response)   
-        if data['producttypes']:
-            print "URL to USGS API TESTS GOOD"
-    except:
-	print "timeout waiting for USGS"
+    #try:
+    tmout = 120
+    response = urllib.request.urlopen(URL, timeout=tmout)
+    body = response.read()
+    data = json.loads(body.decode('utf-8'))
+    if data['producttypes']:
+          print("URL to USGS API TESTS GOOD")
+    #except:
+    #    print("timeout waiting for USGS")
     
     if DEBUG:
         lcd.lcd_clear()
         lcd.backlight(0)
-	
+  
     if DEBUG:
-        print "END OF TEST RUN"
+        print("END OF TEST RUN")
 

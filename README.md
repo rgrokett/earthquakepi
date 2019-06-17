@@ -1,7 +1,7 @@
 # earthquakepi
 Shake &amp; Rattle Raspberry Pi when an earthquake occurs
 
-Version 1.1 - New Features
+Version 2.0 -- Converted to Python3
 
 There are a number of earthquake detector projects for the raspberry pi. These are good for anyone living in an area prone to earthquakes or for those that want to try to detect distant quakes themselves. 
 
@@ -24,6 +24,9 @@ You set the minimum magnitude level you wish it to alarm on. But note, if you se
 cd /home/pi/earthquakepi
 sudo python test.py
 ```
+
+2019-06: Updated all the Adafruit drivers and converted to Python3. You have to start with fresh install to apply this. No changes to hardware are needed, but all software, including OS must be updated.
+
 
 See EarthquakePi.pdf for construction details.
 

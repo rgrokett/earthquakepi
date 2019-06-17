@@ -21,7 +21,7 @@
 # 
 # m h  dom mon dow   command
 
-@reboot sudo python /home/pi/earthquakepi/startup.py >/dev/null 2>&1
+@reboot sudo python3 /home/pi/earthquakepi/startup.py >/dev/null 2>&1
 
-0,15,30,45 08-22 * * * sudo python /home/pi/earthquakepi/earthquakepi.py >/home/pi/earthquakepi/earth.log 2>&1
+0,15,30,45 08-22 * * * sudo python3 /home/pi/earthquakepi/earthquakepi.py >/home/pi/earthquakepi/earth.log 2>&1
 
