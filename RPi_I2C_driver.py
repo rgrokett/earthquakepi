@@ -9,12 +9,17 @@ Made available under GNU GENERAL PUBLIC LICENSE
 # added bits and pieces from various sources
 # By DenisFromHR (Denis Pleic)
 # 2015-02-10, ver 0.1
+# 2019-06-17, ver 0.2 -- Python3
 
 """
 #
 #
 import smbus
 from time import *
+
+# LCD Address
+ADDRESS = 0x27
+
 
 class i2c_device:
    def __init__(self, addr, port=1):
@@ -49,9 +54,6 @@ class i2c_device:
       return self.bus.read_block_data(self.addr, cmd)
 
 
-
-# LCD Address
-ADDRESS = 0x27
 
 # commands
 LCD_CLEARDISPLAY = 0x01

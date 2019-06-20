@@ -1,4 +1,6 @@
 # requires RPi_I2C_driver.py
+# Python3 version
+
 import RPi_I2C_driver
 from time import *
 
@@ -7,7 +9,7 @@ mylcd = RPi_I2C_driver.lcd()
 mylcd.lcd_display_string("RPi I2C test", 1)
 mylcd.lcd_display_string(" Custom chars", 2)
 
-sleep(10) # 2 sec delay
+sleep(2) # 2 sec delay
 
 mylcd.lcd_clear()
 
@@ -52,6 +54,10 @@ mylcd.lcd_display_string_pos("Testing",1,1) # row 1, column 1
 sleep(1)
 mylcd.lcd_display_string_pos("Testing",2,3) # row 2, column 3
 sleep(1)
+mylcd.lcd_display_string_pos("Testing",3,4) # row 3, column 3
+sleep(1)
+mylcd.lcd_display_string_pos("Testing",4,5) # row 4, column 3
+sleep(1)
 mylcd.lcd_clear()
 
 # Now let's define some more custom characters
@@ -87,16 +93,16 @@ pauza = 0.2 # define duration of sleep(x)
 # now draw cust. chars starting from col. 7 (pos. 6)
 
 pos = 6
-mylcd.lcd_display_string_pos(unichr(1),1,6)
+mylcd.lcd_display_string_pos(chr(1),1,6)
 sleep(pauza)
 
-mylcd.lcd_display_string_pos(unichr(2),1,pos)
+mylcd.lcd_display_string_pos(chr(2),1,pos)
 sleep(pauza)
 
-mylcd.lcd_display_string_pos(unichr(3),1,pos)
+mylcd.lcd_display_string_pos(chr(3),1,pos)
 sleep(pauza)
 
-mylcd.lcd_display_string_pos(unichr(4),1,pos)
+mylcd.lcd_display_string_pos(chr(4),1,pos)
 sleep(pauza)
 
 mylcd.lcd_display_string_pos(block,1,pos)
@@ -105,13 +111,13 @@ sleep(pauza)
 # and another one, same as above, 1 char-space to the right
 pos = pos +1 # increase column by one
 
-mylcd.lcd_display_string_pos(unichr(1),1,pos)
+mylcd.lcd_display_string_pos(chr(1),1,pos)
 sleep(pauza)
-mylcd.lcd_display_string_pos(unichr(2),1,pos)
+mylcd.lcd_display_string_pos(chr(2),1,pos)
 sleep(pauza)
-mylcd.lcd_display_string_pos(unichr(3),1,pos)
+mylcd.lcd_display_string_pos(chr(3),1,pos)
 sleep(pauza)
-mylcd.lcd_display_string_pos(unichr(4),1,pos)
+mylcd.lcd_display_string_pos(chr(4),1,pos)
 sleep(pauza)
 mylcd.lcd_display_string_pos(block,1,pos)
 sleep(pauza)
@@ -121,12 +127,12 @@ sleep(pauza)
 # now again load first set of custom chars - smiley
 mylcd.lcd_load_custom_chars(fontdata1)
 
-mylcd.lcd_display_string_pos(unichr(0),1,9)
-mylcd.lcd_display_string_pos(unichr(1),1,10)
-mylcd.lcd_display_string_pos(unichr(2),1,11)
-mylcd.lcd_display_string_pos(unichr(3),2,9)
-mylcd.lcd_display_string_pos(unichr(4),2,10)
-mylcd.lcd_display_string_pos(unichr(5),2,11)
+mylcd.lcd_display_string_pos(chr(0),1,9)
+mylcd.lcd_display_string_pos(chr(1),1,10)
+mylcd.lcd_display_string_pos(chr(2),1,11)
+mylcd.lcd_display_string_pos(chr(3),2,9)
+mylcd.lcd_display_string_pos(chr(4),2,10)
+mylcd.lcd_display_string_pos(chr(5),2,11)
 
 sleep(2)
 mylcd.lcd_clear()
