@@ -163,7 +163,7 @@ if __name__ == '__main__':
     starttime = utcnow_30.strftime('%Y-%m-%dT%H:%M:%S')
     endtime = utcnow_15.strftime('%Y-%m-%dT%H:%M:%S')
 
-    URL = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime="+starttime+"&endtime="+endtime+"&minmagnitude="+str(MINMAG)
+    URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime="+starttime+"&endtime="+endtime+"&minmagnitude="+str(MINMAG)
 
     if LOG:
       print(URL)
