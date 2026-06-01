@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # EARTHQUAKE 
 
 # Uses LCD 20x4 I2C code from 
@@ -19,19 +19,18 @@
 #
 # Version 1.3 2016.06.12 - LCD updates
 #         2.0 2019.06.17 - Converted to python3
+#         2.1 2026.06.01 - Python 3.11 updates
 #
 # License: GPLv3, see: www.gnu.org/licenses/gpl-3.0.html
 #
 
 
-import subprocess
 import os
 import urllib.request, urllib.error, urllib.parse
 import json
 import datetime
 import time
 import atexit
-import socket
 import sys
 import re
 import traceback
@@ -157,31 +156,41 @@ if __name__ == '__main__':
       sound(WAV)
     PAUSE = 10
     
-    utcnow = datetime.datetime.utcnow()
+    utcnow = datetime.datetime.now(datetime.UTC)
     utcnow_15 = utcnow - datetime.timedelta(minutes = 15)
     utcnow_30 = utcnow - datetime.timedelta(minutes = 30)
     starttime = utcnow_30.strftime('%Y-%m-%dT%H:%M:%S')
     endtime = utcnow_15.strftime('%Y-%m-%dT%H:%M:%S')
 
-    URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime="+starttime+"&endtime="+endtime+"&minmagnitude="+str(MINMAG)
+    params = urllib.parse.urlencode({
+        "format": "geojson",
+        "starttime": starttime,
+        "endtime": endtime,
+        "minmagnitude": MINMAG,
+    })
+    URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?" + params
 
     if LOG:
       print(URL)
 
+    data = {"features": []}
+    api_error = None
+
     # Call USGS API. timeout in seconds (USGS response time can be slow!)
     try:
         tmout = 120
-        #socket.setdefaulttimeout(tmout)
         response = urllib.request.urlopen(URL, timeout=tmout)
-        body = response.read()
+        with response:
+            body = response.read()
         data = json.loads(body.decode('utf-8'))
 
         if DEBUG:
             print("--------------")
             print(data)
             print("--------------")
-    except:
-        print("timeout waiting for USGS")
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
+        api_error = e
+        print("Error waiting for USGS:", e)
     
     cnt = 0
     for feature in data['features']:
@@ -200,7 +209,7 @@ if __name__ == '__main__':
           loc = feature['geometry']['coordinates']
     
           tm = tm/1000
-          utime = datetime.datetime.utcfromtimestamp(int(tm)).strftime('%Y-%m-%d %H:%M:%S')
+          utime = datetime.datetime.fromtimestamp(int(tm), datetime.UTC).strftime('%Y-%m-%d %H:%M:%S')
           lines = re.findall(r'.{1,19}(?:\s+|$)', title)
     
           # Rumble Motor
@@ -254,7 +263,15 @@ if __name__ == '__main__':
     if NEOPIXEL:
         ledbar.colorWipe(strip, (0, 0, 0))  # Black wipe
 
-    if (cnt == 0):
+    if api_error:
+        lcd.backlight(1)
+        lcd.lcd_clear()
+        lcd.lcd_display_string('EarthquakePi',1)
+        lcd.lcd_display_string('USGS API ERROR',2)
+        lcd.lcd_display_string(utcnow.strftime('%Y-%m-%dT%H:%M:%S'),3)
+        if LOG:
+           print("USGS API ERROR")
+    elif (cnt == 0):
         lcd.backlight(DISPLAY)
         lcd.lcd_clear()
         lcd.lcd_display_string('EarthquakePi',1)
@@ -268,4 +285,3 @@ if __name__ == '__main__':
         print("END OF RUN")
 
 #END OF MAIN
-

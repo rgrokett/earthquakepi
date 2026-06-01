@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # STARTUP 
 
 # Uses LCD 20x4 I2C code from 
@@ -9,12 +9,12 @@
 # Install:
 # $ sudo apt-get update
 # $ sudo apt-get install build-essential git
-# $ sudo apt-get install python-dev python-smbus python-pip 
+# $ sudo apt-get install python3-dev python3-smbus python3-pip
 # $ sudo apt-get install i2c-tools
 #
 # Usage via cron: 
 # $ crontab -e
-# @reboot sudo python /home/pi/earthquakepi/startup.py >/dev/null 2>&1
+# @reboot sudo python3 /home/pi/earthquakepi/startup.py >/dev/null 2>&1
 #
 #
 # Version 1.0 2016.06.11 - Initial

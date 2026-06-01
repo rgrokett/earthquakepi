@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # TEST EARTHQUAKE 
 
 # Uses LCD 20x4 I2C code from 
@@ -11,7 +11,7 @@
 # Optional Motor    -- MOTOR
 #
 # Usage:
-#   sudo python test.py
+#   sudo python3 test.py
 #
 #
 # Version 1.3 2016.06.12 - LCD updates
@@ -197,4 +197,3 @@ if __name__ == '__main__':
   
     if DEBUG:
         print("END OF TEST RUN")
-
