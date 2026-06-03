@@ -149,12 +149,12 @@ if __name__ == '__main__':
         print("STARTUP")
         if NEOPIXEL:
             ledbar.bargraph(strip,9)
-    if MOTOR:
-      motor(4)
-    if AUDIO:
-      volume(6)
-      sound(WAV)
-    PAUSE = 10
+        if MOTOR:
+            motor(4)
+        if AUDIO:
+            volume(6)
+            sound(WAV)
+        PAUSE = 10
     
     utcnow = datetime.datetime.now(datetime.UTC)
     utcnow_15 = utcnow - datetime.timedelta(minutes = 15)
