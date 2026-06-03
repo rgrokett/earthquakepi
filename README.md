@@ -27,6 +27,11 @@ sudo python test.py
 
 2019-06: Updated all the Adafruit drivers and converted to Python3. You have to start with fresh install to apply this. No changes to hardware are needed, but all software, including OS must be updated.
 
+2026-06: Updated for Python3.11 and added minor improvements.
+
+NOTE to install pip3 packages, you will need to add  --break-system-packages    ex: sudo pip3 install xyz --break-system-packages
+
+This isn't an issue with this RPi Zero, but other Linux dists should use python virtual environments. 
 
 See EarthquakePi.pdf for construction details.
 
